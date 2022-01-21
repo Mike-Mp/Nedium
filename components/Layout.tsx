@@ -5,6 +5,7 @@ const Layout = ({children}: any) => {
     return (
         <>
         <Nav />
+        <hr />
         {children}
         <Footer />
         </>
