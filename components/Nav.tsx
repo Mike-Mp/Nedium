@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Nav() {
     return (
-        <nav className="flex items-center justify-between flex-wrap bg-teal p-6 container mx-auto">
+        <nav className="flex items-center justify-between flex-wrap p-6 container mx-auto">
         <div className="flex items-center flex-no-shrink text-black mr-6">
             <Link href="/">
                 <a className="font-semibold text-xl tracking-tight">Nedium</a>
