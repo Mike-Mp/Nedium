@@ -16,12 +16,12 @@ export default function Nav() {
         <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className="text-sm lg:flex-grow">
             <Link href="/about" >
-                <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter mr-4">
+                <a className="block lg:inline-block lg:mt-0 text-teal-lighter mr-4">
                     About
                 </a>
             </Link>
             <Link href="/login" >
-                <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter mr-4">
+                <a className="block mt-6 lg:inline-block lg:mt-0 text-teal-lighter mr-4">
                     Sign in
                 </a>
             </Link>
