@@ -20,7 +20,7 @@ export default function Nav() {
                     About
                 </a>
             </Link>
-            <Link href="/login" >
+            <Link href="/signin" >
                 <a className="block mt-6 lg:inline-block lg:mt-0 text-teal-lighter mr-4">
                     Sign in
                 </a>
