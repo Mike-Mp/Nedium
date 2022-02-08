@@ -1,5 +1,6 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
+import EmployeeList from '../components/EmployeeList'
 
 const About: NextPage = () => {
     return (
@@ -41,29 +42,7 @@ Together with millions of collaborators, we’re building a <br />trusted and vi
                      leading authors, and smart takes on our own suite of blogs and publications.
                     </p>
 
-                    <div className="grid grid-rows-4">
-
-                        <div>
-                            <a href="#">
-
-                            </a>
-                        </div>
-                            <a href="#">
-
-                            </a>
-                        <div>
-                            <a href="#">
-
-                            </a>
-                        </div>
-
-                        <div>
-                            <a href="#">
-
-                            </a>
-                        </div>
-
-                    </div>
+                    <EmployeeList />
                 </div>
 
             </main>
