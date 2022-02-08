@@ -18,3 +18,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.employeePart {
+  background-color: #ffd1b9;
+}

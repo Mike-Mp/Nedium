@@ -63,7 +63,7 @@ export default function EmployeeList() {
     ]);
 
     return (
-            <div className="grid grid-rows-4 grid-cols-3 gap-5 ml-3 mr-3 mb-10 border-b-2 border-black pb-1">
+            <div className="grid grid-rows-4 grid-cols-3 gap-5 ml-3 mr-3 mb-10 pb-3 border-b-2 border-black pb-1">
 
                 {workerList.length === 0 ? "loading" : workerList.map((item) => (
                     <div key={item.name}>

@@ -29,7 +29,7 @@ Together with millions of collaborators, we’re building a <br />trusted and vi
                      className="relative top-8 bottom-0 left-64 h-80"
                      width="320" height="240"/>
                 </div>
-                <div className="flex flex-col bg-orange-300">
+                <div className="flex flex-col employeePart">
                     <h2 className="text-8xl text-center mt-10 font-serif">A living network of <br />curious minds<strong>.</strong></h2>
                     <p className="text-center mt-5 mb-10">
                     Anyone can write on Medium. Thought-leaders, journalists, experts, and 
