@@ -7,7 +7,7 @@ const Layout = ({children}: any) => {
         <Nav />
         <hr />
         {children}
-        {/* <Footer /> */}
+        <Footer />
         </>
     )
 }

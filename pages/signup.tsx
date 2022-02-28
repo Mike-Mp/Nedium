@@ -1,11 +1,13 @@
 import { NextPage } from 'next'
 import { useState } from 'react'
 import { supabase } from '../api'
+import { useRouter } from 'next/router'
 
 const Signup: NextPage = () => {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const router = useRouter()
 
     const handleLogin = async (email: string) => {
         try {
@@ -22,8 +24,7 @@ const Signup: NextPage = () => {
             })
 
             const { user } = await res.json()
-            
-            console.log(user)
+            if (user) router.push(`/welcome?email${user.email}`)
         } catch(error) {
             alert(error.error_description || error.message)
         } finally {
@@ -67,7 +68,7 @@ const Signup: NextPage = () => {
                 }}
                 disabled={loading}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                    {loading ? 'Loading' : 'Sign In with Magic Link'}
+                    {loading ? 'Loading' : 'Sign Up'}
                 </button>
                 </div>
             </form>

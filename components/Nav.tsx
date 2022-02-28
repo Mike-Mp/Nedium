@@ -1,6 +1,24 @@
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { supabase } from '../api'
 
 export default function Nav() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [userInfo, setUserInfo] = useState('')
+
+    useEffect(() => {
+        const user = supabase.auth.user()
+
+        console.log(user)
+
+        if (user) {
+          setIsLoggedIn(true)
+          setUserInfo({
+            email: user.email
+          })
+        }
+    }, [])
+
     return (
         <nav className="flex items-center justify-between flex-wrap p-6 container mx-auto">
         <div className="flex items-center flex-no-shrink text-black mr-6">
@@ -20,12 +38,18 @@ export default function Nav() {
                     About
                 </a>
             </Link>
-            <Link href="/signin" >
+            {userInfo.length === 0 ? 
+             <Link href="/signin" >
                 <a className="block mt-6 lg:inline-block lg:mt-0 text-teal-lighter mr-4">
                     Sign in
                 </a>
             </Link>
-            
+          :
+           <a className="block mt-6 lg:inline-block lg:mt-0 text-teal-lighter mr-4">
+                   Logged in as {userInfo.email}
+           </a>
+          }
+                     
           </div>
           <div>
             <Link href="/signup">
