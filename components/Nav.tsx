@@ -4,17 +4,17 @@ import { supabase } from '../api'
 
 export default function Nav() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [userInfo, setUserInfo] = useState('')
+    const [userInfo, setUserInfo] = useState<{email: string}>({email: ''})
 
     useEffect(() => {
         const user = supabase.auth.user()
 
-        console.log(user)
-
-        if (user) {
+        if (user?.email) {
           setIsLoggedIn(true)
+          let emailCut = user?.email.split("@");
+          let email = emailCut[0];
           setUserInfo({
-            email: user.email
+            email
           })
         }
     }, [])
@@ -38,7 +38,7 @@ export default function Nav() {
                     About
                 </a>
             </Link>
-            {userInfo.length === 0 ? 
+            {userInfo.email.length === 0 ? 
              <Link href="/signin" >
                 <a className="block mt-6 lg:inline-block lg:mt-0 text-teal-lighter mr-4">
                     Sign in
