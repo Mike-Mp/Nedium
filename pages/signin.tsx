@@ -1,10 +1,13 @@
 import {NextPage} from 'next'
 import { useState } from 'react';
 import { supabase } from '../api';
+import { useRouter } from 'next/router'
 
 const Signin: NextPage = () => {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const router = useRouter()
 
     const handleLogin = async (email: string) => {
         try {
@@ -15,7 +18,8 @@ const Signin: NextPage = () => {
                 console.log('user here')
                 console.log(user)
             }
-            alert('Check email for login link!')
+            
+            
         } catch(error) {
             alert(error.error_description || error.message)
         } finally {
@@ -38,6 +42,13 @@ const Signin: NextPage = () => {
                     placeholder="Email" />
                 </div>
                 <div className="mb-6">
+                    <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
+                        Password
+                    </label>
+                    <input 
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                    type="password" name="password" id="password" placeholder="Password"/>
                 </div>
                 <div className="flex items-center justify-between">
                 <button 
