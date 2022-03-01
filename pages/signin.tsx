@@ -12,14 +12,19 @@ const Signin: NextPage = () => {
     const handleLogin = async (email: string) => {
         try {
             setLoading(true)
-            const { user, error } = await supabase.auth.signIn({ email })
-            if (error) throw error
-            if (user) {
-                console.log('user here')
-                console.log(user)
-            }
-            
-            
+            const res = await fetch('/api/login', {
+                body: JSON.stringify({
+                    email,
+                    password
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                method: "POST",
+            })
+
+            const { user } = await res.json()
+            if (user) router.push(`/welcome?login${true}?email${user.email}`)
         } catch(error) {
             alert(error.error_description || error.message)
         } finally {

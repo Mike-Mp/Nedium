@@ -9,7 +9,7 @@ const Signup: NextPage = () => {
     const [password, setPassword] = useState('')
     const router = useRouter()
 
-    const handleLogin = async (email: string) => {
+    const handleSignup = async (email: string) => {
         try {
             setLoading(true)
             const res = await fetch('/api/register', {
@@ -24,7 +24,7 @@ const Signup: NextPage = () => {
             })
 
             const { user } = await res.json()
-            if (user) router.push(`/welcome?email${user.email}`)
+            if (user) router.push(`/welcome?login${false}?email${user.email}`)
         } catch(error) {
             alert(error.error_description || error.message)
         } finally {
@@ -64,7 +64,7 @@ const Signup: NextPage = () => {
                 <button 
                 onClick={(e) => {
                     e.preventDefault()
-                    handleLogin(email)
+                    handleSignup(email)
                 }}
                 disabled={loading}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
