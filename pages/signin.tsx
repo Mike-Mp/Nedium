@@ -1,6 +1,6 @@
 import {NextPage} from 'next'
-import { useState } from 'react';
-import { supabase } from '../api';
+import { useState, useEffect } from 'react'
+import { supabase } from '../api'
 import { useRouter } from 'next/router'
 
 const Signin: NextPage = () => {
@@ -8,6 +8,13 @@ const Signin: NextPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const router = useRouter()
+
+    useEffect(() => {
+        const user = supabase.auth.user()
+
+        if (user?.email) router.push(`/users/${user.email}`)
+    }, [])
+
 
     const handleLogin = async (email: string) => {
         try {
@@ -24,7 +31,7 @@ const Signin: NextPage = () => {
             })
 
             const { user } = await res.json()
-            if (user) router.push(`/welcome?login${true}?email${user.email}`)
+            if (user) router.push(`/welcome?login=${true}&email=${user.email}`)
         } catch(error) {
             alert(error.error_description || error.message)
         } finally {

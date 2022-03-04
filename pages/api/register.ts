@@ -12,6 +12,9 @@ export default async function registerUser(req: { body: { email: any; password: 
     email: email,
     password: password,
   })
+
+  console.log(error);
+  // HANDLE ERRORS
   // Send a 400 response if something went wrong
   if (error) return res.status(401).json({ error: error.message })
   // Send 200 success if there were no errors!

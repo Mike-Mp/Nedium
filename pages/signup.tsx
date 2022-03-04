@@ -1,5 +1,5 @@
 import { NextPage } from 'next'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../api'
 import { useRouter } from 'next/router'
 
@@ -9,7 +9,13 @@ const Signup: NextPage = () => {
     const [password, setPassword] = useState('')
     const router = useRouter()
 
-    const handleSignup = async (email: string) => {
+    useEffect(() => {
+        const user = supabase.auth.user()
+
+        if (user?.email) router.push(`/users/${user.email}`)
+    }, [])
+
+    const handleSignup = async () => {
         try {
             setLoading(true)
             const res = await fetch('/api/register', {
@@ -23,8 +29,10 @@ const Signup: NextPage = () => {
                 method: "POST",
             })
 
+            console.log(res)
+
             const { user } = await res.json()
-            if (user) router.push(`/welcome?login${false}?email${user.email}`)
+            if (user) router.push(`/welcome?login=${false}&email=${user.email}`)
         } catch(error) {
             alert(error.error_description || error.message)
         } finally {
@@ -64,7 +72,7 @@ const Signup: NextPage = () => {
                 <button 
                 onClick={(e) => {
                     e.preventDefault()
-                    handleSignup(email)
+                    handleSignup()
                 }}
                 disabled={loading}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">

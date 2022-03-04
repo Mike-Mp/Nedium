@@ -1,23 +1,40 @@
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-export default function Welcome() {
-    const router = useRouter()
-    const {email, login} = router.query
+export interface Props {
+    email: string,
+    login: boolean
+}
 
-    console.log(login)
+export default function Welcome(props: Props) {
 
     return (
         <>
-        {login ? 
-        <p>
-            Thank your for signing in. Please check your { email } inbox to verify your login.
+        {props.login ? 
+        <p className="shadow-lg">
+            Thank your for signing in. Please check your {props.email} inbox to verify your login.
        </p> 
                :
-       <p>
-            Thank your for signing up. Please check your { email } inbox to verify your email address.
+       <p className="shadow-lg">
+            Thank your for signing up. Please check your {props.email} inbox to verify your email address.
        </p>
-
         }
         </>
     )
+}
+
+export const getServerSideProps = async (ctx: any) => {
+
+    console.log('ctx', ctx)
+
+    console.log(ctx.query)
+
+    const query = ctx.query;
+
+    return {
+        props: {
+            email: query.email,
+            login: query.login
+        }
+    }
 }
