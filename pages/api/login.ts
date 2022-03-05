@@ -17,9 +17,6 @@ export default async function loginUser(req: { body: { email: any; password: any
     password: password,
   })
 
-  console.log('error', error)
-  console.log('user', user)
-  console.log('session', session)
   // Send a 400 response if something went wrong
   if (error) return res.status(401).json({ error: error.message })
   // Send 200 success if there were no errors!
