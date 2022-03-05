@@ -3,8 +3,12 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../api'
 import { useRouter } from 'next/router'
 
+import ErrorMessage from '../components/ErrorMessage'
+
 const Signin: NextPage = () => {
     const [loading, setLoading] = useState(false)
+    const [errorPresent, setErrorPresent] = useState(false)
+    const [errorText, setErrorText] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const router = useRouter()
@@ -16,8 +20,7 @@ const Signin: NextPage = () => {
     }, [])
 
 
-    const handleLogin = async (email: string) => {
-        try {
+    const handleLogin = async () => {
             setLoading(true)
             const res = await fetch('/api/login', {
                 body: JSON.stringify({
@@ -30,17 +33,24 @@ const Signin: NextPage = () => {
                 method: "POST",
             })
 
-            const { user } = await res.json()
+
+            const { user, error } = await res.json()
+
             if (user) router.push(`/welcome?login=${true}&email=${user.email}`)
-        } catch(error) {
-            alert(error.error_description || error.message)
-        } finally {
+            if (error) {
+                setErrorText(error)
+                setErrorPresent(true)
+            }
             setLoading(false)
-        }
     }
 
     return (
         <div className="w-full max-w-xs mx-auto mt-24">
+            {errorPresent ?
+                <ErrorMessage message={errorText} setErrorPresent={setErrorPresent}/>
+                          :
+                ''
+            }
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -66,7 +76,7 @@ const Signin: NextPage = () => {
                 <button 
                 onClick={(e) => {
                     e.preventDefault()
-                    handleLogin(email)
+                    handleLogin()
                 }}
                 disabled={loading}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">

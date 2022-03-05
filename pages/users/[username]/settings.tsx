@@ -16,7 +16,6 @@ export const getServerSideProps = async (ctx: any) => {
 
     const { user, token } = await supabase.auth.api.getUserByCookie(ctx)
 
-    console.log('ctx', ctx)
     console.log('user', user)
     console.log('token', token)
 

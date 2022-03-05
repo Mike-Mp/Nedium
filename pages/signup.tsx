@@ -64,7 +64,7 @@ const Signup: NextPage = () => {
                     type="password"
                     id="password"
                     name="password"
-                    placeholder="Password"
+                    placeholder="Password (at least 6 characters long)"
                     required
                     />
                 </div>
